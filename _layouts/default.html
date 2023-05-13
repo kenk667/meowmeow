@@ -1,1 +1,33 @@
-{{ content }}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    {% if page.css %}
+      <link rel="stylesheet" href="{{ page.css | relative_url }}">
+    {% endif %}
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          {% for item in site.data.navigation %}
+            <li{% if page.url == item.url %} class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </header>
+    <main>
+      {{ content }}
+    </main>
+    <footer>
+      <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}</p>
+    </footer>
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    {% if page.js %}
+      <script src="{{ page.js | relative_url }}"></script>
+    {% endif %}
+  </body>
+</html>
